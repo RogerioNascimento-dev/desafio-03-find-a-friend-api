@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+  find-a-friend-api:
+    image: bitnami/postgresql
+    volumes:
+      - ./pgsqldata:/bitnami/postgresql
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRESQL_USERNAME=docker
+      - POSTGRESQL_PASSWORD=docker
+      - POSTGRESQL_DATABASE=findAfriend
+volumes:
+  pgsqldata:
