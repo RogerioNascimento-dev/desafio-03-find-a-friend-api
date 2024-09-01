@@ -1,0 +1,79 @@
+//npx prisma generate
+//npx prisma migrate dev
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Organization {
+  id         String   @id @default(uuid())
+  name       String
+  email      String   @unique
+  password   String
+  street     String?
+  whatsapp   String
+  zip_code   String
+  address    String
+  state      String
+  city       String
+  district   String
+  latitude   Decimal
+  longitude  Decimal
+  pets       Pet[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("organizations")
+}
+
+model Pet {
+  id                 String            @id @default(uuid())
+  name               String
+  about              String
+  age                PetAge
+  size               PetSize
+  energy             PetEnergy
+  independency_level IndependencyLevel
+  environment        Environment
+  organization_id    String?
+  Organization       Organization?     @relation(fields: [organization_id], references: [id])
+  created_at         DateTime          @default(now())
+  updated_at         DateTime          @updatedAt
+
+  @@map("pets")
+}
+
+enum PetAge {
+  BABY
+  YOUNG
+  ADULT
+  SENIOR
+}
+
+enum PetSize {
+  SMALL
+  MEDIUM
+  LARGE
+  EXTRA_LARGE
+}
+
+enum PetEnergy {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum Environment {
+  APARTMENT
+  HOUSE
+}
+
+enum IndependencyLevel {
+  LOW
+  MEDIUM
+  HIGH
+}
