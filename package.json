@@ -1,0 +1,21 @@
+{
+  "name": "desafio-03-find-a-friend-api",
+  "version": "1.0.0",
+  "description": "Desafio referente ao módulo: API Node.js com SOLID",
+  "main": "dist/index.js",
+  "scripts": {
+    "start:dev": "tsx watch src/server.ts"
+  },
+  "keywords": [],
+  "author": "Rogério Nascimento",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "fastify": "^4.28.1",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.2",
+    "tsx": "^4.19.0"
+  }
+}
