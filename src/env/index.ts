@@ -1,5 +1,5 @@
 import 'dotenv/config'
-import { EnvValidator } from '../validators/env/envValidator'
+import { EnvValidator } from '~/validators/env/envValidator'
 
 const _env = EnvValidator.safeParse(process.env)
 
