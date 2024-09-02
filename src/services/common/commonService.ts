@@ -18,11 +18,14 @@ export abstract class CommonService {
   async getAddress(zipCode: string) {
     try {
       zipCode = zipCode.replace(/\D/g, '')
-
-      return await this.externalRequest<IAddress>({
+      const address = await this.externalRequest<IAddress>({
         method: 'GET',
         endpoint: `https://viacep.com.br/ws/${zipCode}/json`,
       })
+
+      if (address.erro === 'true') throw new InvalidZipCodeError()
+
+      return address
     } catch (e) {
       throw new InvalidZipCodeError()
     }

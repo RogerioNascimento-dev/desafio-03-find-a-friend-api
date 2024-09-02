@@ -36,8 +36,7 @@ export class OrganizationService extends CommonService {
       district: address.bairro,
       address: address.logradouro,
     }
-
     const organization = await this.organizationRepository.create(org)
-    return { organization }
+    return { organization: { ...organization, password: undefined } }
   }
 }
