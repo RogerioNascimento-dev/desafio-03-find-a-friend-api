@@ -1,27 +1,7 @@
 import axios from 'axios'
 import { InvalidZipCodeError } from '~/errors/invalidZipCodeError'
+import { IAddress, IExternalRequest } from './ICommonService'
 
-interface IExternalRequest {
-  payload: object
-  method: 'GET' | 'POST' | 'PUT' | 'DELETE'
-  endpoint: string
-}
-
-interface IAddress {
-  cep: string
-  logradouro: string
-  complemento: string
-  unidade: string
-  bairro: string
-  localidade: string
-  uf: string
-  estado: string
-  regiao: string
-  ibge: string
-  gia: string
-  ddd: string
-  siafi: string
-}
 export abstract class CommonService {
   async externalRequest<T>(request: IExternalRequest) {
     const { payload, method, endpoint } = request
@@ -40,7 +20,6 @@ export abstract class CommonService {
       zipCode = zipCode.replace(/\D/g, '')
 
       return await this.externalRequest<IAddress>({
-        payload: { cep: zipCode },
         method: 'GET',
         endpoint: `https://viacep.com.br/ws/${zipCode}/json`,
       })
