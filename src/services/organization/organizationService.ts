@@ -2,8 +2,8 @@ import { Prisma } from '@prisma/client'
 import { hash } from 'bcryptjs'
 import { SALT_HASH } from '~/configs/constants'
 import { EmailAlreadyExistsError } from '~/errors/emailAlreadyExistsError'
+import { CreateOrganizationRequest } from '~/http/validators/organization/createOrganizationRequest'
 import { IOrganizationRepository } from '~/repositories/organization/IOrganizationRepository'
-import { CreateOrganizationRequest } from '~/validators/organization/createOrganizationRequest'
 import { CommonService } from '../common/commonService'
 
 export class OrganizationService extends CommonService {

@@ -1,5 +1,5 @@
 import { config } from 'dotenv'
-import { EnvValidator } from '~/validators/env/envValidator'
+import { EnvValidator } from '~/http/validators/env/envValidator'
 
 if (process.env.NODE_ENV === 'test') {
   config({ path: '.env.test' })

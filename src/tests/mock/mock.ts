@@ -1,6 +1,6 @@
 import { fakerPT_BR as fakerPtBr } from '@faker-js/faker'
 import { Prisma } from '@prisma/client'
-import { CreateOrganizationRequest } from '~/validators/organization/createOrganizationRequest'
+import { CreateOrganizationRequest } from '~/http/validators/organization/createOrganizationRequest'
 
 export function getCreateOrganizationRequestMock(
   knowZipCode: string,

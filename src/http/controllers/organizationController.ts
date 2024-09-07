@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
+import { createOrganizationRequest } from '~/http/validators/organization/createOrganizationRequest'
 import { OrganizationRepository } from '~/repositories/organization/organizationRepository'
 import { OrganizationService } from '~/services/organization/organizationService'
-import { createOrganizationRequest } from '~/validators/organization/createOrganizationRequest'
 
 const organizationService = new OrganizationService(
   new OrganizationRepository(),

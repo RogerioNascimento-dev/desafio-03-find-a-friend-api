@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
+import { loginRequest } from '~/http/validators/auth/loginRequest'
 import { OrganizationRepository } from '~/repositories/organization/organizationRepository'
 import { AuthService } from '~/services/auth/authService'
-import { loginRequest } from '~/validators/auth/loginRequest'
 
 const authService = new AuthService(new OrganizationRepository())
 
