@@ -4,7 +4,10 @@
   "description": "Desafio referente ao módulo: API Node.js com SOLID",
   "main": "dist/index.js",
   "scripts": {
-    "start:dev": "tsx watch src/server.ts"
+    "start:dev": "tsx watch src/server.ts",
+    "test:unit": "vitest run --dir src/tests/unit",
+    "test:feature": "vitest run --dir src/tests/feature",
+    "test:coverage": "vitest run --coverage"
   },
   "keywords": [],
   "author": "Rogério Nascimento",
@@ -18,12 +21,18 @@
     "zod": "3.23.8"
   },
   "devDependencies": {
+    "@faker-js/faker": "9.0.0",
     "@rocketseat/eslint-config": "2.2.2",
     "@types/bcryptjs": "2.4.6",
     "@types/node": "22.5.2",
+    "@types/supertest": "6.0.2",
+    "@vitest/coverage-v8": "2.0.5",
     "eslint": "8.57.0",
     "prisma": "5.19.0",
+    "supertest": "7.0.0",
     "tsx": "4.19.0",
-    "typescript": "5.5.4"
+    "typescript": "5.5.4",
+    "vite-tsconfig-paths": "5.0.1",
+    "vitest": "2.0.5"
   }
 }
