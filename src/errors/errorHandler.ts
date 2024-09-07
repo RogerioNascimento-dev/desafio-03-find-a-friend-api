@@ -17,6 +17,7 @@ export function ErrorHandler(
     AxiosError: handlerAxiosError,
     InvalidZipCodeError: handlerInvalidZipCodeError,
     EmailAlreadyExistsError: handlerEmailAlreadyExistsError,
+    InvalidCredentialsError: handlerInvalidCredentialsError,
   }
 
   const handler = errorHandles[error.constructor.name]
@@ -48,4 +49,7 @@ function handlerInvalidZipCodeError(reply: FastifyReply, error: Error) {
 }
 function handlerEmailAlreadyExistsError(reply: FastifyReply, error: Error) {
   reply.status(400).send({ message: error.message })
+}
+function handlerInvalidCredentialsError(reply: FastifyReply, error: Error) {
+  reply.status(401).send({ message: error.message })
 }

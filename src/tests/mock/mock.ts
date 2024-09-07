@@ -1,24 +1,46 @@
-import { fakerPT_BR } from '@faker-js/faker';
-import { CreateOrganizationRequest } from '~/validators/organization/createOrganizationRequest';
+import { fakerPT_BR as fakerPtBr } from '@faker-js/faker'
+import { Prisma } from '@prisma/client'
+import { CreateOrganizationRequest } from '~/validators/organization/createOrganizationRequest'
 
-
-export function getCreateOrganizationRequestMock(knowZipCode: string): CreateOrganizationRequest {
+export function getCreateOrganizationRequestMock(
+  knowZipCode: string,
+): CreateOrganizationRequest {
   return {
-    name: fakerPT_BR.company.name(),
+    name: fakerPtBr.company.name(),
     zipCode: knowZipCode,
-    street: fakerPT_BR.location.street(),
-    email:  fakerPT_BR.internet.email(),
-    password: fakerPT_BR.internet.password(),
+    street: fakerPtBr.location.street(),
+    email: fakerPtBr.internet.email(),
+    password: fakerPtBr.internet.password(),
     latitude: getCoordinateBr('latitude'),
     longitude: -50.3149852,
-    whatsapp: fakerPT_BR.phone.number()
+    whatsapp: fakerPtBr.phone.number(),
   }
 }
 
-function getCoordinateBr(type: 'latitude' | 'longitude'): number {  
-  const types = {
-    latitude: {min: -33.7508, max:5.2722},
-    longitude: {min: -73.9922, max: -34.7917}
+export function getOrganizationCreateInputMock(
+  knowZipCode: string,
+): Prisma.OrganizationCreateInput {
+  const payload = getCreateOrganizationRequestMock(knowZipCode)
+  return {
+    name: payload.name,
+    email: payload.email,
+    zip_code: payload.zipCode,
+    street: payload.street,
+    password: payload.password,
+    whatsapp: payload.whatsapp,
+    latitude: payload.latitude,
+    longitude: payload.longitude,
+    state: fakerPtBr.location.state({ abbreviated: true }),
+    city: fakerPtBr.location.city(),
+    district: fakerPtBr.location.state(),
+    address: fakerPtBr.location.streetAddress(),
   }
-  return Math.random() * (types[type].max - types[type].min) + types[type].min;
+}
+
+function getCoordinateBr(type: 'latitude' | 'longitude'): number {
+  const types = {
+    latitude: { min: -33.7508, max: 5.2722 },
+    longitude: { min: -73.9922, max: -34.7917 },
+  }
+  return Math.random() * (types[type].max - types[type].min) + types[type].min
 }
