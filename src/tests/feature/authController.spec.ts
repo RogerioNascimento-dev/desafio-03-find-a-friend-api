@@ -45,4 +45,29 @@ describe('Organization Controller', async () => {
       expect.stringContaining('refreshToken='),
     ])
   })
+  it('Should not be able to refresh an access token without sending a token refresh', async () => {
+    const response = await request(kernel.server).post('/auth/refresh').send()
+    expect(response.statusCode).toBe(401)
+    expect(response.body).toEqual({ message: 'Refresh token is missing.' })
+  })
+  it('Should be able refresh token', async () => {
+    const orgMock = getOrganizationCreateInputMock('42717-120')
+    const passwordHash = await hash(orgMock.password, SALT_HASH)
+    await prisma.organization.create({
+      data: { ...orgMock, password: passwordHash },
+    })
+    const responseAuth = await request(kernel.server)
+      .post('/auth/login')
+      .send({ email: orgMock.email, password: orgMock.password })
+
+    const cookies = responseAuth.get('Set-Cookie') ?? []
+
+    const response = await request(kernel.server)
+      .post('/auth/refresh')
+      .set('Cookie', cookies)
+      .send()
+
+    expect(response.statusCode).toBe(200)
+    expect(response.body).toEqual({ token: expect.any(String) })
+  })
 })
