@@ -36,4 +36,32 @@ describe('Organization Controller', async () => {
       expect.objectContaining({ name: petMock.name, age: petMock.age }),
     )
   })
+  it('Should be able list pets by city', async () => {
+    const orgMock = getOrganizationCreateInputMock('03017-000')
+    const passwordHash = await hash(orgMock.password, SALT_HASH)
+    await prisma.organization.create({
+      data: { ...orgMock, password: passwordHash },
+    })
+    const responseToken = await request(kernel.server)
+      .post('/auth/login')
+      .send({ email: orgMock.email, password: orgMock.password })
+
+    const token = responseToken.body.token
+    const petMock = getCreatePetMock()
+    await request(kernel.server)
+      .post('/pet')
+      .set('Authorization', `Bearer ${token}`)
+      .send(petMock)
+
+    const response = await request(kernel.server)
+      .get('/pet')
+      .query({ city: 'São Paulo' })
+
+    expect(response.statusCode).toBe(200)
+    expect(response.body.pets).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ name: petMock.name, age: petMock.age }),
+      ]),
+    )
+  })
 })

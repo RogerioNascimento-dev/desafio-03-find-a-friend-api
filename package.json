@@ -6,7 +6,7 @@
   "scripts": {
     "start:dev": "tsx watch src/server.ts",
     "test:unit": "vitest run --dir src/tests/unit",
-    "test:feature": "vitest run --dir src/tests/feature",
+    "test:e2e": "vitest run --dir src/tests/feature",
     "test:coverage": "vitest run --coverage"
   },
   "keywords": [],
@@ -15,7 +15,7 @@
   "dependencies": {
     "@fastify/cookie": "9.4.0",
     "@fastify/jwt": "8.0.1",
-    "@prisma/client": "5.19.0",
+    "@prisma/client": "5.19.1",
     "axios": "1.7.7",
     "bcryptjs": "2.4.3",
     "dotenv": "16.4.5",
@@ -30,7 +30,7 @@
     "@types/supertest": "6.0.2",
     "@vitest/coverage-v8": "2.0.5",
     "eslint": "8.57.0",
-    "prisma": "5.19.0",
+    "prisma": "5.19.1",
     "supertest": "7.0.0",
     "tsx": "4.19.0",
     "typescript": "5.5.4",
