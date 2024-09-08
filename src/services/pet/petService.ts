@@ -1,4 +1,5 @@
 import { Pet } from '@prisma/client'
+import { ResourceNotFoundError } from '~/errors/resourceNotFoundError'
 import { CreatePetRequest } from '~/http/validators/pet/createPetRequest'
 import { ListPetRequest } from '~/http/validators/pet/listPetRequest'
 import { IOrganizationRepository } from '~/repositories/organization/IOrganizationRepository'
@@ -33,5 +34,13 @@ export class PetService extends CommonService {
   async list(params: ListPetRequest, city: string): Promise<Pet[]> {
     const pets = await this.petRepository.list(params, city)
     return pets
+  }
+
+  async detail(petId: string): Promise<Pet> {
+    const pet = await this.petRepository.find(petId)
+    if (!pet) {
+      throw new ResourceNotFoundError()
+    }
+    return pet
   }
 }

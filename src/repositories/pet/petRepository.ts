@@ -10,7 +10,21 @@ export class PetRepository implements IPetRepository {
   }
 
   async find(id: string) {
-    const pet = await prisma.pet.findUnique({ where: { id } })
+    const pet = await prisma.pet.findUnique({
+      where: { id },
+      include: {
+        Organization: {
+          select: {
+            id: true,
+            name: true,
+            city: true,
+            state: true,
+            address: true,
+            whatsapp: true,
+          },
+        },
+      },
+    })
     return pet
   }
 

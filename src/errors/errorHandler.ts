@@ -18,6 +18,7 @@ export function ErrorHandler(
     InvalidZipCodeError: handlerInvalidZipCodeError,
     EmailAlreadyExistsError: handlerEmailAlreadyExistsError,
     InvalidCredentialsError: handlerInvalidCredentialsError,
+    ResourceNotFoundError: handlerResourceNotFoundError,
   }
 
   const handler = errorHandles[error.constructor.name]
@@ -52,4 +53,7 @@ function handlerEmailAlreadyExistsError(reply: FastifyReply, error: Error) {
 }
 function handlerInvalidCredentialsError(reply: FastifyReply, error: Error) {
   reply.status(401).send({ message: error.message })
+}
+function handlerResourceNotFoundError(reply: FastifyReply, error: Error) {
+  reply.status(404).send({ message: error.message })
 }

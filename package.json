@@ -7,7 +7,9 @@
     "start:dev": "tsx watch src/server.ts",
     "test:unit": "vitest run --dir src/tests/unit",
     "test:e2e": "vitest run --dir src/tests/feature",
-    "test:coverage": "vitest run --coverage"
+    "test:e2e:watch": "vitest --dir src/tests/feature",
+    "test:coverage": "vitest run --coverage",
+    "test:coverage:watch": "vitest --coverage"
   },
   "keywords": [],
   "author": "Rogério Nascimento",

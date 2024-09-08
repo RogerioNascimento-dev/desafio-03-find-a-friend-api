@@ -56,6 +56,21 @@ export function getOrganizationCreateInputMock(
     address: fakerPtBr.location.streetAddress(),
   }
 }
+export function getPetCreateInputMock(
+  organizationId: string,
+): Prisma.PetUncheckedCreateInput {
+  const payload = getCreatePetMock()
+  return {
+    name: payload.name,
+    about: payload.about,
+    age: payload.age,
+    size: payload.size,
+    energy: payload.energy,
+    independency_level: payload.independencyLevel,
+    environment: payload.environment,
+    organization_id: organizationId,
+  }
+}
 
 function getCoordinateBr(type: 'latitude' | 'longitude'): number {
   const types = {

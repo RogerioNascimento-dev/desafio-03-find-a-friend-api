@@ -25,10 +25,21 @@ describe('Organization Controller', async () => {
     expect(response.statusCode).toBe(200)
     expect(response.body).toEqual({ token: expect.any(String) })
   })
-  it('Should not be able authenticate with invalid credentials.', async () => {
+  it('Should not be able authenticate with invalid email.', async () => {
     const response = await request(kernel.server)
       .post('/auth/login')
       .send({ email: 'abc@gmail.com', password: 'asdas' })
+    expect(response.statusCode).toBe(401)
+  })
+  it('Should not be able authenticate with invalid password.', async () => {
+    const orgMock = getOrganizationCreateInputMock('42717-120')
+    const passwordHash = await hash(orgMock.password, SALT_HASH)
+    await prisma.organization.create({
+      data: { ...orgMock, password: passwordHash },
+    })
+    const response = await request(kernel.server)
+      .post('/auth/login')
+      .send({ email: orgMock.email, password: 'ABX-XPTO' })
     expect(response.statusCode).toBe(401)
   })
   it('Should be able return cookie refresh token on login.', async () => {
@@ -69,5 +80,9 @@ describe('Organization Controller', async () => {
 
     expect(response.statusCode).toBe(200)
     expect(response.body).toEqual({ token: expect.any(String) })
+  })
+  it('should not be able login without email or password', async () => {
+    const response = await request(kernel.server).post('/auth/login').send()
+    expect(response.statusCode).toBe(422)
   })
 })

@@ -3,6 +3,7 @@ import { OrganizationRepository } from '~/repositories/organization/organization
 import { PetRepository } from '~/repositories/pet/petRepository'
 import { PetService } from '~/services/pet/petService'
 import { createPetRequest } from '../validators/pet/createPetRequest'
+import { detailPetRequest } from '../validators/pet/detailPetRequest'
 import {
   listPetParamRequest,
   listPetRequest,
@@ -24,4 +25,9 @@ export async function list(request: FastifyRequest, reply: FastifyReply) {
   const { city } = listPetParamRequest.parse(request.params)
   const pets = await petService.list(payload, city)
   return reply.status(200).send({ pets })
+}
+export async function detail(request: FastifyRequest, reply: FastifyReply) {
+  const { petId } = detailPetRequest.parse(request.params)
+  const pet = await petService.detail(petId)
+  return reply.status(200).send({ pet })
 }
