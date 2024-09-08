@@ -25,6 +25,12 @@ describe('Organization Controller', async () => {
     expect(response.statusCode).toBe(200)
     expect(response.body).toEqual({ token: expect.any(String) })
   })
+  it('Should not be able authenticate with invalid credentials.', async () => {
+    const response = await request(kernel.server)
+      .post('/auth/login')
+      .send({ email: 'abc@gmail.com', password: 'asdas' })
+    expect(response.statusCode).toBe(401)
+  })
   it('Should be able return cookie refresh token on login.', async () => {
     const orgMock = getOrganizationCreateInputMock('42717-120')
     const passwordHash = await hash(orgMock.password, SALT_HASH)

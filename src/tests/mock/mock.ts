@@ -1,6 +1,14 @@
 import { fakerPT_BR as fakerPtBr } from '@faker-js/faker'
-import { Prisma } from '@prisma/client'
+import {
+  Environment,
+  IndependencyLevel,
+  PetAge,
+  PetEnergy,
+  PetSize,
+  Prisma,
+} from '@prisma/client'
 import { CreateOrganizationRequest } from '~/http/validators/organization/createOrganizationRequest'
+import { CreatePetRequest } from '~/http/validators/pet/createPetRequest'
 
 export function getCreateOrganizationRequestMock(
   knowZipCode: string,
@@ -14,6 +22,18 @@ export function getCreateOrganizationRequestMock(
     latitude: getCoordinateBr('latitude'),
     longitude: -50.3149852,
     whatsapp: fakerPtBr.phone.number(),
+  }
+}
+
+export function getCreatePetMock(): CreatePetRequest {
+  return {
+    name: fakerPtBr.animal.dog(),
+    about: fakerPtBr.lorem.lines(1),
+    age: PetAge.SENIOR,
+    size: PetSize.MEDIUM,
+    energy: PetEnergy.LOW,
+    independencyLevel: IndependencyLevel.MEDIUM,
+    environment: Environment.APARTMENT,
   }
 }
 
