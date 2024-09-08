@@ -14,12 +14,13 @@ export class PetRepository implements IPetRepository {
     return pet
   }
 
-  async list(orgParams: ListPetRequest) {
+  async list(petParams: ListPetRequest, city: string) {
     const pets = await prisma.pet.findMany({
       where: {
         Organization: {
-          ...orgParams,
+          city,
         },
+        ...petParams,
       },
     })
     return pets

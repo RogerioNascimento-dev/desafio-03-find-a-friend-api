@@ -30,8 +30,8 @@ export class PetService extends CommonService {
     return pet
   }
 
-  async list(params: ListPetRequest): Promise<Pet[]> {
-    const pets = await this.petRepository.list(params)
+  async list(params: ListPetRequest, city: string): Promise<Pet[]> {
+    const pets = await this.petRepository.list(params, city)
     return pets
   }
 }

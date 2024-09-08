@@ -4,5 +4,5 @@ import { authMiddleware } from '~/http/middlewares/authMiddleware'
 
 export async function petRoute(app: FastifyInstance) {
   app.post('', { onRequest: [authMiddleware] }, create)
-  app.get('', list)
+  app.get('/:city', list)
 }
