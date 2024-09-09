@@ -1,7 +1,7 @@
 import fastifyCookie from '@fastify/cookie'
 import fastifyJwt from '@fastify/jwt'
 import fastify from 'fastify'
-import { ErrorHandler } from '~/errors/errorHandler'
+import { ErrorHandler } from '~/http/errors/errorHandler'
 import { env } from './env'
 import { authRoute } from './routes/authRoute'
 import { organizationRoute } from './routes/organizationRoute'

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { InvalidZipCodeError } from '~/errors/invalidZipCodeError'
+import { InvalidZipCodeError } from '~/http/errors/invalidZipCodeError'
 import { IAddress, IExternalRequest } from './ICommonService'
 
 export abstract class CommonService {

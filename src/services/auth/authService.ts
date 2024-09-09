@@ -1,6 +1,6 @@
 import { Organization } from '@prisma/client'
 import { compareSync } from 'bcryptjs'
-import { InvalidCredentialsError } from '~/errors/invalidCredentialsError'
+import { InvalidCredentialsError } from '~/http/errors/invalidCredentialsError'
 import { LoginRequest } from '~/http/validators/auth/loginRequest'
 import { IOrganizationRepository } from '~/repositories/organization/IOrganizationRepository'
 import { CommonService } from '../common/commonService'

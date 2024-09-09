@@ -1,5 +1,5 @@
 import { Pet } from '@prisma/client'
-import { ResourceNotFoundError } from '~/errors/resourceNotFoundError'
+import { ResourceNotFoundError } from '~/http/errors/resourceNotFoundError'
 import { CreatePetRequest } from '~/http/validators/pet/createPetRequest'
 import { ListPetRequest } from '~/http/validators/pet/listPetRequest'
 import { IOrganizationRepository } from '~/repositories/organization/IOrganizationRepository'
