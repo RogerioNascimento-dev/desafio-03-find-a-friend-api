@@ -1,4 +1,4 @@
-import { Pet } from '@prisma/client'
+import { Pet, Prisma } from '@prisma/client'
 import { ResourceNotFoundError } from '~/http/errors/resourceNotFoundError'
 import { CreatePetRequest } from '~/http/validators/pet/createPetRequest'
 import { ListPetRequest } from '~/http/validators/pet/listPetRequest'
@@ -26,6 +26,7 @@ export class PetService extends CommonService {
       size: payload.size,
       environment: payload.environment,
       independency_level: payload.independencyLevel,
+      requests: payload.requests as Prisma.JsonArray,
       Organization: { connect: { id: organizationId } },
     })
     return pet

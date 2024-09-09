@@ -19,6 +19,7 @@ export const createPetRequest = z.object({
     IndependencyLevel.HIGH,
   ]),
   environment: z.enum([Environment.APARTMENT, Environment.HOUSE]),
+  requests: z.array(z.string()).nullable(),
 })
 
 export type CreatePetRequest = z.infer<typeof createPetRequest>

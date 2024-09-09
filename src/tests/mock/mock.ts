@@ -34,6 +34,7 @@ export function getCreatePetMock(): CreatePetRequest {
     energy: PetEnergy.LOW,
     independencyLevel: IndependencyLevel.MEDIUM,
     environment: Environment.APARTMENT,
+    requests: [fakerPtBr.lorem.lines(1)],
   }
 }
 
